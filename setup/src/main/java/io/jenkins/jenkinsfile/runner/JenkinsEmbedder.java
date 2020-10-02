@@ -39,7 +39,7 @@ import hudson.model.AbstractProject;
 import hudson.model.Computer;
 import hudson.model.DownloadService;
 import hudson.model.Executor;
-import hudson.model.Hudson;
+import jenkins.model.Jenkins;
 import hudson.model.JDK;
 import hudson.model.Queue;
 import hudson.model.RootAction;
@@ -320,7 +320,7 @@ public abstract class JenkinsEmbedder implements RootAction {
             r.decorateHome(this, home);
         }
         try {
-            return new Hudson(home, webServer, getPluginManager());
+            return new Jenkins(home, webServer, getPluginManager());
         } catch (InterruptedException x) {
             throw new Exception("Jenkins startup interrupted", x);
         } finally {
@@ -368,7 +368,7 @@ public abstract class JenkinsEmbedder implements RootAction {
     }
 
     /**
-     * Creates {@link hudson.Launcher.LocalLauncher}. Useful for launching processes.
+     * Creates {@link jenkins.Launcher.LocalLauncher}. Useful for launching processes.
      */
     public Launcher.LocalLauncher createLocalLauncher() {
         return new Launcher.LocalLauncher(StreamTaskListener.fromStdout());
